@@ -15,18 +15,32 @@ namespace board
         {
             InitializeComponent();
 
+
+            Load += BoardForm_Load; // 폼 로드 이벤트 등록
+            Activated += BoardForm_Activated; // 폼 로드 이벤트 등록
+            
+        }
+
+        private void BoardForm_Load(object sender, EventArgs e)
+        {
+            // DateTimePicker 초기값 설정 (처음 폼을 로드할 때만 설정)
+            dtpStartDate.Value = DateTime.Today.AddMonths(-1); // 한 달 전
+            dtpEndDate.Value = DateTime.Today; // 오늘
+        }
+
+        private async void BoardForm_Activated(object sender, EventArgs e)
+        {
+            //Console.WriteLine("hello");
             // 로그인 상태 확인 (공통 메서드 사용)
             common.SessionHelper.EnsureLoggedIn(this);
 
-            Load += BoardForm_Load; // 폼 로드 이벤트 등록
-        }
+            // 로그인 상태라면 게시글 목록을 불러옴
+            if (common.Session.IsLoggedIn)
+            {
+                await LoadBoardList();
+            }
 
-        private async void BoardForm_Load(object sender, EventArgs e)
-        {
-            // DateTimePicker 초기값 설정
-            dtpStartDate.Value = DateTime.Today.AddMonths(-1); // 한 달 전
-            dtpEndDate.Value = DateTime.Today; // 오늘
-            await LoadBoardList();
+
         }
 
         // 게시글 조회
@@ -95,7 +109,7 @@ namespace board
         }
 
         // BoardForm.cs (게시글 목록 폼)
-        private async void dataGridViewBoard_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewBoard_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -109,19 +123,19 @@ namespace board
                 detailForm.ShowDialog(); // 모달로 폼을 열어 닫힐 때까지 대기
 
                 // 상세보기 폼이 닫히면 목록을 새로 고침하고, 현재 폼을 다시 표시
-                await LoadBoardList();
+                //await LoadBoardList();
                 this.Show();
             }
         }
 
-        private async void btnBoardNew_Click(object sender, EventArgs e)
+        private void btnBoardNew_Click(object sender, EventArgs e)
         {
             this.Hide(); // 현재 폼을 숨김
 
             var boardNewForm = new BoardNewForm();
             boardNewForm.ShowDialog(); // 모달로 폼을 보여줌, 닫힐 때까지 대기
 
-            await LoadBoardList(); // 폼이 닫힌 후에 게시글 목록 새로 고침
+            //await LoadBoardList(); // 폼이 닫힌 후에 게시글 목록 새로 고침
             this.Show(); // 목록 폼을 다시 나타냄
         }
 

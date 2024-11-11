@@ -38,8 +38,8 @@ namespace board
                 txtTitle.Text = board.boardTitle;
                 txtContent.Text = board.boardContent;
                 //lblDttm.Text = board.boardDttm;
+                
                 // 작성일자 변환
-
                 try
                 {
                     // 응답 데이터에서 날짜 부분만 추출 (앞의 14자리)
