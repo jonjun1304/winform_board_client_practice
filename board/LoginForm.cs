@@ -24,6 +24,11 @@ namespace board
 
         private async void BtnLogin_Click(object sender, EventArgs e)
         {
+            await LoginRequest();
+        }
+
+        private async Task LoginRequest()
+        {
             if (string.IsNullOrWhiteSpace(txtUserId.Text) || string.IsNullOrWhiteSpace(UserPassword.Text))
             {
                 labelLoginMsg.Text = "아이디와 비밀번호를 입력해주세요.";
@@ -89,6 +94,32 @@ namespace board
                     btnLogin.Enabled = true; // 버튼 활성화
                 }
             }
+        }
+
+        private async void txtUserId_KeyDown(object sender, KeyEventArgs e)
+        {
+            await Enter_KeyDown(e);
+        }
+
+        private async void UserPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            await Enter_KeyDown(e);
+        }
+
+        private async Task Enter_KeyDown(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                await LoginRequest();
+                e.SuppressKeyPress = true; // Enter 키 입력이 다른 컨트롤에 전파되지 않도록 방지
+            }
+        }
+
+        private void btnJoinUser_Click(object sender, EventArgs e)
+        {
+            // 회원가입
+            // To Do...
+
         }
     }
 }

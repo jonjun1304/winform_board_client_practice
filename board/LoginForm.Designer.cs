@@ -35,6 +35,7 @@ namespace board
             this.UserPassword = new System.Windows.Forms.TextBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.labelLoginMsg = new System.Windows.Forms.Label();
+            this.btnJoinUser = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtUserId
@@ -43,6 +44,7 @@ namespace board
             this.txtUserId.Name = "txtUserId";
             this.txtUserId.Size = new System.Drawing.Size(156, 21);
             this.txtUserId.TabIndex = 0;
+            this.txtUserId.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtUserId_KeyDown);
             // 
             // label1
             // 
@@ -69,6 +71,7 @@ namespace board
             this.UserPassword.Size = new System.Drawing.Size(156, 21);
             this.UserPassword.TabIndex = 3;
             this.UserPassword.UseSystemPasswordChar = true;
+            this.UserPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserPassword_KeyDown);
             // 
             // btnLogin
             // 
@@ -88,18 +91,29 @@ namespace board
             this.labelLoginMsg.TabIndex = 6;
             this.labelLoginMsg.Text = "로그인이 필요합니다.";
             // 
-            // loginForm
+            // btnJoinUser
+            // 
+            this.btnJoinUser.Location = new System.Drawing.Point(267, 74);
+            this.btnJoinUser.Name = "btnJoinUser";
+            this.btnJoinUser.Size = new System.Drawing.Size(118, 33);
+            this.btnJoinUser.TabIndex = 7;
+            this.btnJoinUser.Text = "회원가입";
+            this.btnJoinUser.UseVisualStyleBackColor = true;
+            this.btnJoinUser.Click += new System.EventHandler(this.btnJoinUser_Click);
+            // 
+            // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(400, 112);
+            this.ClientSize = new System.Drawing.Size(400, 119);
+            this.Controls.Add(this.btnJoinUser);
             this.Controls.Add(this.labelLoginMsg);
             this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.UserPassword);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtUserId);
-            this.Name = "loginForm";
+            this.Name = "LoginForm";
             this.Text = "로그인";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -114,5 +128,6 @@ namespace board
         private System.Windows.Forms.TextBox UserPassword; // 사용자 비밀번호
         private System.Windows.Forms.Button btnLogin; // 로그인 실행 버튼
         private System.Windows.Forms.Label labelLoginMsg; // 로그인 안내 메시지
+        private System.Windows.Forms.Button btnJoinUser;
     }
 }

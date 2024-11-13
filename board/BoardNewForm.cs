@@ -28,7 +28,7 @@ namespace board
                 boardTitle = txtTitle.Text,
                 boardContent = txtContent.Text,
                 //boardDttm = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                userId = "admin" // 테스트용 사용자 ID
+                userId = common.Session.UserId // 테스트용 사용자 ID
             };
 
             string json = JsonConvert.SerializeObject(boardDto);

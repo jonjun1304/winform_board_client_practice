@@ -14,8 +14,7 @@ namespace board
         public BoardForm()
         {
             InitializeComponent();
-
-
+            
             Load += BoardForm_Load; // 폼 로드 이벤트 등록
             Activated += BoardForm_Activated; // 폼 로드 이벤트 등록
             
@@ -37,6 +36,9 @@ namespace board
             // 로그인 상태라면 게시글 목록을 불러옴
             if (common.Session.IsLoggedIn)
             {
+                // HeaderControl의 사용자명을 갱신
+                headerControl1.Username = common.Session.UserId + " ▼";
+
                 await LoadBoardList();
             }
 

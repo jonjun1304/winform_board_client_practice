@@ -38,6 +38,7 @@ namespace board
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
+            this.headerControl1 = new board.HeaderControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBoard)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,11 +123,20 @@ namespace board
             this.label3.TabIndex = 8;
             this.label3.Text = "~";
             // 
+            // headerControl1
+            // 
+            this.headerControl1.Location = new System.Drawing.Point(305, 4);
+            this.headerControl1.Name = "headerControl1";
+            this.headerControl1.Size = new System.Drawing.Size(483, 31);
+            this.headerControl1.TabIndex = 9;
+            this.headerControl1.Username = "사용자명";
+            // 
             // BoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 475);
+            this.Controls.Add(this.headerControl1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpEndDate);
             this.Controls.Add(this.dtpStartDate);
@@ -155,5 +165,6 @@ namespace board
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.Label label3;
+        private HeaderControl headerControl1;
     }
 }
