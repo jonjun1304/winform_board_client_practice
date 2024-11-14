@@ -10,5 +10,9 @@ namespace board
     {
         public string userId { get; set; }
         public string userPassword { get; set; }
+        public string joinDttm { get; set; }
+        public string birthday { get; set; }
+        public string phoneNo { get; set; }
+        public string authorityType { get; set; }
     }
 }

@@ -68,9 +68,9 @@ namespace board
             // 
             this.UserPassword.Location = new System.Drawing.Point(105, 47);
             this.UserPassword.Name = "UserPassword";
+            this.UserPassword.PasswordChar = '●';
             this.UserPassword.Size = new System.Drawing.Size(156, 21);
             this.UserPassword.TabIndex = 3;
-            this.UserPassword.UseSystemPasswordChar = true;
             this.UserPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserPassword_KeyDown);
             // 
             // btnLogin

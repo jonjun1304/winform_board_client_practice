@@ -118,8 +118,11 @@ namespace board
         private void btnJoinUser_Click(object sender, EventArgs e)
         {
             // 회원가입
-            // To Do...
+            this.Hide();
 
+            var joinUserForm = new JoinUserForm();
+            joinUserForm.ShowDialog();
+            this.Show();
         }
     }
 }
