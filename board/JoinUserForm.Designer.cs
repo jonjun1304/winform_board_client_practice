@@ -222,6 +222,7 @@ namespace board
             this.txtUserPassword.PasswordChar = '●';
             this.txtUserPassword.Size = new System.Drawing.Size(234, 32);
             this.txtUserPassword.TabIndex = 102;
+            this.txtUserPassword.TextChanged += new System.EventHandler(this.txtUserPassword_TextChanged);
             // 
             // label14
             // 

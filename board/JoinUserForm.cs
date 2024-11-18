@@ -150,9 +150,17 @@ namespace board
 
         }
 
-
+        private void txtUserPassword_TextChanged(object sender, EventArgs e)
+        {
+            passwordCheck();
+        }
 
         private void txtUserPasswordCheck_TextChanged(object sender, EventArgs e)
+        {
+            passwordCheck();
+        }
+
+        private void passwordCheck()
         {
             if (string.IsNullOrWhiteSpace(txtUserPassword.Text))
             {
@@ -164,7 +172,7 @@ namespace board
 
             string password1 = txtUserPassword.Text;
             string password2 = txtUserPasswordCheck.Text;
-            if(password1 == password2)
+            if (password1 == password2)
             {
                 isPasswordCheck = true;
                 txtPasswordCheckMsg.Text = "비밀번호가 일치합니다.";
