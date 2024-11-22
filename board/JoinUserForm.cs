@@ -160,7 +160,7 @@ namespace board
             passwordCheck();
         }
 
-        private void passwordCheck()
+        private void passwordCheck() 
         {
             if (string.IsNullOrWhiteSpace(txtUserPassword.Text))
             {

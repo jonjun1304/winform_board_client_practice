@@ -64,6 +64,19 @@
     <Compile Include="common\Session.cs" />
     <Compile Include="common\SessionHelper.cs" />
     <Compile Include="Config.cs" />
+    <Compile Include="control\CommentControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\CommentControl.Designer.cs">
+      <DependentUpon>CommentControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="control\CommentWriteControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="control\CommentWriteControl.Designer.cs">
+      <DependentUpon>CommentWriteControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dto\CommentDto.cs" />
     <Compile Include="dto\UserDto.cs" />
     <Compile Include="dto\BoardDto.cs" />
     <Compile Include="BoardForm.cs">
@@ -72,10 +85,10 @@
     <Compile Include="BoardForm.Designer.cs">
       <DependentUpon>BoardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HeaderControl.cs">
+    <Compile Include="control\HeaderControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="HeaderControl.Designer.cs">
+    <Compile Include="control\HeaderControl.Designer.cs">
       <DependentUpon>HeaderControl.cs</DependentUpon>
     </Compile>
     <Compile Include="JoinUserForm.cs">
@@ -107,7 +120,13 @@
     <EmbeddedResource Include="BoardNewForm.resx">
       <DependentUpon>BoardNewForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HeaderControl.resx">
+    <EmbeddedResource Include="control\CommentControl.resx">
+      <DependentUpon>CommentControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\CommentWriteControl.resx">
+      <DependentUpon>CommentWriteControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="control\HeaderControl.resx">
       <DependentUpon>HeaderControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="JoinUserForm.resx">

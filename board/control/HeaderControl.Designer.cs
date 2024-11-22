@@ -32,8 +32,6 @@ namespace board
             this.components = new System.ComponentModel.Container();
             this.lblUsername = new System.Windows.Forms.Label();
             this.userMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.logoutItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.userMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblUsername
@@ -49,16 +47,8 @@ namespace board
             // 
             // userMenu
             // 
-            this.userMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.logoutItem});
             this.userMenu.Name = "userMenu";
-            this.userMenu.Size = new System.Drawing.Size(123, 26);
-            // 
-            // logoutItem
-            // 
-            this.logoutItem.Name = "logoutItem";
-            this.logoutItem.Size = new System.Drawing.Size(122, 22);
-            this.logoutItem.Text = "로그아웃";
+            this.userMenu.Size = new System.Drawing.Size(181, 26);
             // 
             // HeaderControl
             // 
@@ -68,7 +58,6 @@ namespace board
             this.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.Name = "HeaderControl";
             this.Size = new System.Drawing.Size(483, 25);
-            this.userMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -76,6 +65,5 @@ namespace board
         #endregion
         private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.ContextMenuStrip userMenu;
-        private System.Windows.Forms.ToolStripMenuItem logoutItem;
     }
 }

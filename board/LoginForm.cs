@@ -60,6 +60,7 @@ namespace board
                         {
                             MessageBox.Show("로그인 성공", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             common.Session.UserId = userDto.userId;
+                            common.Session.AuthorityType = userDto.authorityType;
                             // 로그인 성공 시 LoginForm을 닫음
                             //this.Close();
                             this.DialogResult = DialogResult.OK; // 로그인 성공 시 DialogResult 설정

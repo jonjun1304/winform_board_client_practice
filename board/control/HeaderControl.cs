@@ -23,17 +23,23 @@ namespace board
         private void InitializeUserMenu()
         {
             // ContextMenuStrip 초기화 및 항목 추가
-            userMenu = new ContextMenuStrip();
+            //userMenu = new ContextMenuStrip();
+
+            // ContextMenuStrip 초기화 여부 확인
+            if (userMenu == null)
+            {
+                userMenu = new ContextMenuStrip();
+            }
 
             // 로그아웃 메뉴 항목 추가
-            //ToolStripMenuItem logoutItem = new ToolStripMenuItem("로그아웃");
+            ToolStripMenuItem logoutItem = new ToolStripMenuItem("로그아웃");
             logoutItem.Click += BtnLogout_Click;
             userMenu.Items.Add(logoutItem);
 
             // 추후 다른 항목 추가 가능
-            // ToolStripMenuItem anotherItem = new ToolStripMenuItem("다른 기능");
-            // anotherItem.Click += AnotherItem_Click;
-            // userMenu.Items.Add(anotherItem);
+            ToolStripMenuItem userUpdateItem = new ToolStripMenuItem("개인정보 수정");
+            userUpdateItem.Click += BtnUserUpdate_Click;
+            userMenu.Items.Add(userUpdateItem);
         }
 
         private void LblUsername_Click(object sender, EventArgs e)
@@ -73,5 +79,31 @@ namespace board
                 
             }
         }
+
+        private void BtnUserUpdate_Click(object sender, EventArgs e)
+        {
+            // 회원수정 로직
+            Form currentForm = this.FindForm();
+            if (currentForm != null)
+            {
+                currentForm.Hide(); // 현재 폼을 숨김
+                UserUpdateForm userUpdateForm = new UserUpdateForm();
+                // 로그인 폼이 닫힐 때 처리할 작업 등록
+                userUpdateForm.FormClosed += (s, args) => {
+                    if (common.Session.IsLoggedIn)
+                    {
+                        currentForm.Show(); // 로그인이 완료되었다면 현재 폼 다시 표시
+                    }
+                    else
+                    {
+                        currentForm.Close(); // 로그인하지 않으면 현재 폼을 닫음
+                    }
+                };
+                userUpdateForm.Show(); // 로그인 폼 표시
+
+            }
+        }
+
+
     }
 }

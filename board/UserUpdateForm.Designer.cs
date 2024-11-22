@@ -90,6 +90,7 @@ namespace board
             this.txtUserPassword.PasswordChar = '●';
             this.txtUserPassword.Size = new System.Drawing.Size(234, 32);
             this.txtUserPassword.TabIndex = 124;
+            this.txtUserPassword.TextChanged += new System.EventHandler(this.txtUserPassword_TextChanged);
             // 
             // label14
             // 
@@ -249,6 +250,7 @@ namespace board
             this.btnUserUpdate.TabIndex = 132;
             this.btnUserUpdate.Text = "수정하기";
             this.btnUserUpdate.UseVisualStyleBackColor = true;
+            this.btnUserUpdate.Click += new System.EventHandler(this.btnUserUpdate_Click);
             // 
             // UserUpdateForm
             // 
@@ -276,7 +278,7 @@ namespace board
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Name = "UserUpdateForm";
-            this.Text = "UserUpdateForm";
+            this.Text = "회원 정보 수정";
             this.ResumeLayout(false);
             this.PerformLayout();
 

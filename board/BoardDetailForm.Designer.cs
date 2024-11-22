@@ -35,6 +35,9 @@ namespace board
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.txtTitle = new System.Windows.Forms.TextBox();
+            this.btnClose = new System.Windows.Forms.Button();
+            this.commentPanel = new System.Windows.Forms.Panel();
+            this.commentWriteControl = new board.control.CommentWriteControl();
             this.SuspendLayout();
             // 
             // lblDttm
@@ -92,11 +95,44 @@ namespace board
             this.txtTitle.Size = new System.Drawing.Size(462, 21);
             this.txtTitle.TabIndex = 13;
             // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(713, 421);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 14;
+            this.btnClose.Text = "닫기";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // commentPanel
+            // 
+            this.commentPanel.AutoSize = true;
+            this.commentPanel.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.commentPanel.Location = new System.Drawing.Point(14, 532);
+            this.commentPanel.Name = "commentPanel";
+            this.commentPanel.Size = new System.Drawing.Size(0, 0);
+            this.commentPanel.TabIndex = 15;
+            // 
+            // commentWriteControl
+            // 
+            this.commentWriteControl.AutoSize = true;
+            this.commentWriteControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.commentWriteControl.CommentText = "";
+            this.commentWriteControl.Location = new System.Drawing.Point(14, 450);
+            this.commentWriteControl.Name = "commentWriteControl";
+            this.commentWriteControl.Size = new System.Drawing.Size(774, 74);
+            this.commentWriteControl.TabIndex = 16;
+            // 
             // BoardDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(841, 596);
+            this.Controls.Add(this.commentWriteControl);
+            this.Controls.Add(this.commentPanel);
+            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnEdit);
@@ -117,5 +153,8 @@ namespace board
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.TextBox txtTitle;
+        private System.Windows.Forms.Button btnClose;
+        private System.Windows.Forms.Panel commentPanel;
+        private control.CommentWriteControl commentWriteControl;
     }
 }

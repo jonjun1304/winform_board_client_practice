@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Net.Http;
+using board.dto;
+using board.control;
 
 namespace board
 {
@@ -22,11 +24,28 @@ namespace board
         {
             InitializeComponent();
             this.boardSeq = boardSeq;
+            Load += BoardDetailForm_Load;
+            //LoadBoardDetails();
+        }
+
+        private void BoardDetailForm_Load(object sender, EventArgs e)
+        {
+            btnEdit.Visible = false;
+            btnDelete.Visible = false;
+
+            // 게시글 상세 정보 로드
             LoadBoardDetails();
+
+            // 댓글 작성 컨트롤 추가
+            AddCommentWriteControl();
+
+            // 댓글 리스트 로드
+            LoadComments();
         }
 
         private async void LoadBoardDetails()
         {
+
             HttpResponseMessage response = await client.GetAsync($"{Config.ServerUrl}/board/{boardSeq}");
 
             if (response.IsSuccessStatusCode)
@@ -48,12 +67,22 @@ namespace board
 
                     // 원하는 형식으로 표시
                     lblDttm.Text = parsedDate.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초");
+
                 }
                 catch (FormatException)
                 {
                     lblDttm.Text = "날짜 형식 오류";
                 }
+
+                // 작성자
                 lblUserId.Text = board.userId;
+
+                // 수정 삭제 버튼 권한 체크
+                if (common.Session.AuthorityType == "admin" || common.Session.UserId == board.userId)
+                {
+                    btnEdit.Visible = true;
+                    btnDelete.Visible = true;
+                }
             }
             else
             {
@@ -177,6 +206,112 @@ namespace board
             txtContent.ReadOnly = true;
             isEditMode = false;
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private async void LoadComments()
+        {
+            commentPanel.Controls.Clear(); // 기존 댓글 제거
+
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync($"{Config.ServerUrl}/comment/{boardSeq}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    var comments = JsonConvert.DeserializeObject<List<CommentDto>>(result);
+
+                    int yOffset = 0; // 댓글 컨트롤의 Y 위치 조정
+                    foreach (var comment in comments)
+                    {
+                        // 응답 데이터에서 날짜 부분만 추출 (앞의 14자리)
+                        string dateString = comment.commentDttm.Substring(0, 14);
+                        DateTime parsedDate = DateTime.ParseExact(dateString, "yyyyMMddHHmmss", null);
+
+                        var commentControl = new CommentControl
+                        {
+                            //Dock = DockStyle.Top,
+                            // 댓글 데이터를 CommentControl에 전달
+                            userId = comment.userId,
+                            commentText = comment.commentContent,
+                            commentDate = parsedDate.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초")
+                    };
+
+                        commentControl.Location = new Point(0, yOffset);
+                        commentPanel.Controls.Add(commentControl);
+                        yOffset += commentControl.Height + 5; // 다음 댓글 위치
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("댓글 데이터를 불러오는 데 실패했습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"댓글 로드 중 오류 발생: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void AddCommentWriteControl()
+        {
+            /*var commentWriteControl = new CommentWriteControl
+            {
+                Dock = DockStyle.Top
+            };*/
+
+            // 댓글 작성 이벤트 처리
+            commentWriteControl.CommentSaved += async (s, e) =>
+            {
+                await SaveComment(commentWriteControl.CommentText);
+                commentWriteControl.CommentText = string.Empty; // 입력 필드 초기화
+                LoadComments(); // 댓글 리스트 새로고침
+            };
+
+            //this.Controls.Add(commentWriteControl);
+        }
+
+        private async Task SaveComment(string content)
+        {
+            try
+            {
+                var commentDto = new CommentDto
+                {
+                    boardSeq = this.boardSeq,
+                    userId = common.Session.UserId,
+                    commentContent = content
+                };
+
+                string json = JsonConvert.SerializeObject(commentDto);
+                StringContent HttpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await client.PostAsync($"{Config.ServerUrl}/comment", HttpContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("댓글이 성공적으로 추가되었습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("댓글 추가에 실패했습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"댓글 저장 중 오류 발생: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
+
+
+
 
 
     }
