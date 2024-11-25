@@ -59,6 +59,7 @@ namespace board
         {
             // 로그아웃 로직
             common.Session.UserId = null;
+            common.Session.AuthorityType = null;
             Form currentForm = this.FindForm();
             if (currentForm != null)
             {

@@ -236,6 +236,7 @@ namespace board
                         {
                             //Dock = DockStyle.Top,
                             // 댓글 데이터를 CommentControl에 전달
+                            commentId = comment.commentId,
                             userId = comment.userId,
                             commentText = comment.commentContent,
                             commentDate = parsedDate.ToString("yyyy년 MM월 dd일 HH시 mm분 ss초")

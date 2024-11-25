@@ -32,6 +32,8 @@ namespace board.control
             this.lblUserId = new System.Windows.Forms.Label();
             this.tBoxComment = new System.Windows.Forms.TextBox();
             this.lblCommentDttm = new System.Windows.Forms.Label();
+            this.btnCommentDelete = new System.Windows.Forms.Button();
+            this.lblCommentId = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblUserId
@@ -49,17 +51,38 @@ namespace board.control
             this.tBoxComment.Location = new System.Drawing.Point(7, 22);
             this.tBoxComment.Multiline = true;
             this.tBoxComment.Name = "tBoxComment";
-            this.tBoxComment.Size = new System.Drawing.Size(714, 31);
+            this.tBoxComment.Size = new System.Drawing.Size(661, 31);
             this.tBoxComment.TabIndex = 1;
+            this.tBoxComment.TextChanged += new System.EventHandler(this.tBoxComment_TextChanged);
             // 
             // lblCommentDttm
             // 
-            this.lblCommentDttm.Location = new System.Drawing.Point(538, 7);
+            this.lblCommentDttm.Location = new System.Drawing.Point(489, 7);
             this.lblCommentDttm.Name = "lblCommentDttm";
-            this.lblCommentDttm.Size = new System.Drawing.Size(180, 12);
+            this.lblCommentDttm.Size = new System.Drawing.Size(229, 12);
             this.lblCommentDttm.TabIndex = 2;
             this.lblCommentDttm.Text = "작성일자";
             this.lblCommentDttm.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // btnCommentDelete
+            // 
+            this.btnCommentDelete.Location = new System.Drawing.Point(673, 22);
+            this.btnCommentDelete.Name = "btnCommentDelete";
+            this.btnCommentDelete.Size = new System.Drawing.Size(43, 31);
+            this.btnCommentDelete.TabIndex = 3;
+            this.btnCommentDelete.Text = "삭제";
+            this.btnCommentDelete.UseVisualStyleBackColor = true;
+            this.btnCommentDelete.Click += new System.EventHandler(this.btnCommentDelete_Click);
+            // 
+            // lblCommentId
+            // 
+            this.lblCommentId.AutoSize = true;
+            this.lblCommentId.Location = new System.Drawing.Point(313, 6);
+            this.lblCommentId.Name = "lblCommentId";
+            this.lblCommentId.Size = new System.Drawing.Size(68, 12);
+            this.lblCommentId.TabIndex = 4;
+            this.lblCommentId.Text = "commentId";
+            this.lblCommentId.Visible = false;
             // 
             // CommentControl
             // 
@@ -67,11 +90,13 @@ namespace board.control
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.Controls.Add(this.lblCommentId);
+            this.Controls.Add(this.btnCommentDelete);
             this.Controls.Add(this.lblCommentDttm);
             this.Controls.Add(this.tBoxComment);
             this.Controls.Add(this.lblUserId);
             this.Name = "CommentControl";
-            this.Size = new System.Drawing.Size(724, 56);
+            this.Size = new System.Drawing.Size(721, 56);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -82,5 +107,7 @@ namespace board.control
         private System.Windows.Forms.Label lblUserId;
         private System.Windows.Forms.TextBox tBoxComment;
         private System.Windows.Forms.Label lblCommentDttm;
+        private System.Windows.Forms.Button btnCommentDelete;
+        private System.Windows.Forms.Label lblCommentId;
     }
 }

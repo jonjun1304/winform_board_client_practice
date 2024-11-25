@@ -76,6 +76,7 @@
     <Compile Include="control\CommentWriteControl.Designer.cs">
       <DependentUpon>CommentWriteControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="dto\BaseDto.cs" />
     <Compile Include="dto\CommentDto.cs" />
     <Compile Include="dto\UserDto.cs" />
     <Compile Include="dto\BoardDto.cs" />

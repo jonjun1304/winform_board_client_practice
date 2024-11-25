@@ -53,24 +53,29 @@ namespace board
                     String url = $"{Config.ServerUrl}/user/login";
                     HttpResponseMessage response = await client.PostAsync(url, content);
 
-                    string responseMessage = await response.Content.ReadAsStringAsync();
+                    string result = await response.Content.ReadAsStringAsync();//여길 바꿀꺼야
+                    // API 응답 구조에 맞게 처리
+                    var responseDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
+                    string resMsg = responseDict["resMsg"]?.ToString();
+                    var resUser = JsonConvert.DeserializeObject<UserDto>(responseDict["resUser"]?.ToString());
+
                     if (response.IsSuccessStatusCode)
                     {
-                        if (responseMessage == "SUCCESS")
+                        if (resMsg == "SUCCESS")
                         {
                             MessageBox.Show("로그인 성공", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            common.Session.UserId = userDto.userId;
-                            common.Session.AuthorityType = userDto.authorityType;
+                            common.Session.UserId = resUser.userId;
+                            common.Session.AuthorityType = resUser.authorityType;
                             // 로그인 성공 시 LoginForm을 닫음
                             //this.Close();
                             this.DialogResult = DialogResult.OK; // 로그인 성공 시 DialogResult 설정
                             this.Close();
                         }
-                        else if (responseMessage == "USER_NOT_FOUND")
+                        else if (resMsg == "USER_NOT_FOUND")
                         {
                             labelLoginMsg.Text = "존재하지 않는 아이디입니다.";
                         }
-                        else if (responseMessage == "PASSWORD_INCORRECT")
+                        else if (resMsg == "PASSWORD_INCORRECT")
                         {
                             labelLoginMsg.Text = "비밀번호가 틀렸습니다.";
                         }
