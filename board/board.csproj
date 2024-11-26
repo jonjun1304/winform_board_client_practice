@@ -49,16 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardDetailForm.cs">
+    <Compile Include="form\BoardDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BoardDetailForm.Designer.cs">
+    <Compile Include="form\BoardDetailForm.Designer.cs">
       <DependentUpon>BoardDetailForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="BoardNewForm.cs">
+    <Compile Include="form\BoardNewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BoardNewForm.Designer.cs">
+    <Compile Include="form\BoardNewForm.Designer.cs">
       <DependentUpon>BoardNewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="common\Session.cs" />
@@ -80,10 +80,10 @@
     <Compile Include="dto\CommentDto.cs" />
     <Compile Include="dto\UserDto.cs" />
     <Compile Include="dto\BoardDto.cs" />
-    <Compile Include="BoardForm.cs">
+    <Compile Include="form\BoardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BoardForm.Designer.cs">
+    <Compile Include="form\BoardForm.Designer.cs">
       <DependentUpon>BoardForm.cs</DependentUpon>
     </Compile>
     <Compile Include="control\HeaderControl.cs">
@@ -92,33 +92,39 @@
     <Compile Include="control\HeaderControl.Designer.cs">
       <DependentUpon>HeaderControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="JoinUserForm.cs">
+    <Compile Include="form\JoinUserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="JoinUserForm.Designer.cs">
+    <Compile Include="form\JoinUserForm.Designer.cs">
       <DependentUpon>JoinUserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="form\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="form\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="mdi\TabControlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mdi\TabControlForm.Designer.cs">
+      <DependentUpon>TabControlForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserUpdateForm.cs">
+    <Compile Include="form\UserUpdateForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UserUpdateForm.Designer.cs">
+    <Compile Include="form\UserUpdateForm.Designer.cs">
       <DependentUpon>UserUpdateForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BoardDetailForm.resx">
+    <EmbeddedResource Include="form\BoardDetailForm.resx">
       <DependentUpon>BoardDetailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BoardForm.resx">
+    <EmbeddedResource Include="form\BoardForm.resx">
       <DependentUpon>BoardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BoardNewForm.resx">
+    <EmbeddedResource Include="form\BoardNewForm.resx">
       <DependentUpon>BoardNewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="control\CommentControl.resx">
@@ -130,10 +136,10 @@
     <EmbeddedResource Include="control\HeaderControl.resx">
       <DependentUpon>HeaderControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="JoinUserForm.resx">
+    <EmbeddedResource Include="form\JoinUserForm.resx">
       <DependentUpon>JoinUserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="form\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -145,7 +151,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="UserUpdateForm.resx">
+    <EmbeddedResource Include="form\UserUpdateForm.resx">
       <DependentUpon>UserUpdateForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
