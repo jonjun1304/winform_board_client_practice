@@ -38,14 +38,13 @@ namespace board
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
-            this.headerControl1 = new board.HeaderControl();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBoard)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewBoard
             // 
             this.dataGridViewBoard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewBoard.Location = new System.Drawing.Point(12, 70);
+            this.dataGridViewBoard.Location = new System.Drawing.Point(12, 42);
             this.dataGridViewBoard.Name = "dataGridViewBoard";
             this.dataGridViewBoard.ReadOnly = true;
             this.dataGridViewBoard.RowTemplate.Height = 23;
@@ -56,7 +55,7 @@ namespace board
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(713, 37);
+            this.btnSearch.Location = new System.Drawing.Point(713, 9);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 1;
@@ -66,7 +65,7 @@ namespace board
             // 
             // btnBoardNew
             // 
-            this.btnBoardNew.Location = new System.Drawing.Point(12, 446);
+            this.btnBoardNew.Location = new System.Drawing.Point(12, 418);
             this.btnBoardNew.Name = "btnBoardNew";
             this.btnBoardNew.Size = new System.Drawing.Size(87, 23);
             this.btnBoardNew.TabIndex = 2;
@@ -77,7 +76,7 @@ namespace board
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 41);
+            this.label1.Location = new System.Drawing.Point(13, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(29, 12);
             this.label1.TabIndex = 3;
@@ -85,7 +84,7 @@ namespace board
             // 
             // txtTitleSearch
             // 
-            this.txtTitleSearch.Location = new System.Drawing.Point(48, 38);
+            this.txtTitleSearch.Location = new System.Drawing.Point(48, 10);
             this.txtTitleSearch.Name = "txtTitleSearch";
             this.txtTitleSearch.Size = new System.Drawing.Size(227, 21);
             this.txtTitleSearch.TabIndex = 4;
@@ -94,7 +93,7 @@ namespace board
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(282, 42);
+            this.label2.Location = new System.Drawing.Point(282, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 5;
@@ -102,14 +101,14 @@ namespace board
             // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(341, 38);
+            this.dtpStartDate.Location = new System.Drawing.Point(341, 10);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(171, 21);
             this.dtpStartDate.TabIndex = 6;
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(536, 38);
+            this.dtpEndDate.Location = new System.Drawing.Point(536, 10);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(171, 21);
             this.dtpEndDate.TabIndex = 7;
@@ -117,26 +116,17 @@ namespace board
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(517, 43);
+            this.label3.Location = new System.Drawing.Point(517, 15);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(14, 12);
             this.label3.TabIndex = 8;
             this.label3.Text = "~";
             // 
-            // headerControl1
-            // 
-            this.headerControl1.Location = new System.Drawing.Point(305, 4);
-            this.headerControl1.Name = "headerControl1";
-            this.headerControl1.Size = new System.Drawing.Size(483, 31);
-            this.headerControl1.TabIndex = 9;
-            this.headerControl1.Username = "사용자명";
-            // 
             // BoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 475);
-            this.Controls.Add(this.headerControl1);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.dtpEndDate);
             this.Controls.Add(this.dtpStartDate);
@@ -147,7 +137,7 @@ namespace board
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.dataGridViewBoard);
             this.Name = "BoardForm";
-            this.Text = "Form1";
+            this.Text = "게시판";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBoard)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -165,6 +155,5 @@ namespace board
         private System.Windows.Forms.DateTimePicker dtpStartDate;
         private System.Windows.Forms.DateTimePicker dtpEndDate;
         private System.Windows.Forms.Label label3;
-        private HeaderControl headerControl1;
     }
 }

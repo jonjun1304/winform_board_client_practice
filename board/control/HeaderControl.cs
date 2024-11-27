@@ -16,8 +16,26 @@ namespace board
         {
             InitializeComponent();
             InitializeUserMenu();
-            //btnLogout.Click += BtnLogout_Click; // 로그아웃 버튼 클릭 이벤트 등록
+
+            Enter += Form_Enter_Event; // 폼 활성화 이벤트 등록
+
             lblUsername.Click += LblUsername_Click;
+        }
+
+        private void Form_Enter_Event(object sender, EventArgs e)
+        {
+            // 로그인 상태 확인 (공통 메서드 사용)
+            //common.SessionHelper.EnsureLoggedIn(this);
+
+            // 로그인 상태라면 헤더 사용자명 변경
+            if (common.Session.IsLoggedIn)
+            {
+                // HeaderControl의 사용자명을 갱신
+                lblUsername.Text = common.Session.UserId + " ▼";
+
+            }
+
+
         }
 
         private void InitializeUserMenu()
@@ -40,6 +58,8 @@ namespace board
             ToolStripMenuItem userUpdateItem = new ToolStripMenuItem("개인정보 수정");
             userUpdateItem.Click += BtnUserUpdate_Click;
             userMenu.Items.Add(userUpdateItem);
+
+            lblUsername.Text = common.Session.UserId + " ▼";
         }
 
         private void LblUsername_Click(object sender, EventArgs e)

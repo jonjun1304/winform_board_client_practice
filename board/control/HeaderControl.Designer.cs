@@ -36,11 +36,13 @@ namespace board
             // 
             // lblUsername
             // 
+            this.lblUsername.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblUsername.Font = new System.Drawing.Font("굴림", 12F, System.Drawing.FontStyle.Bold);
             this.lblUsername.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.lblUsername.Location = new System.Drawing.Point(329, 5);
+            this.lblUsername.Location = new System.Drawing.Point(333, 0);
             this.lblUsername.Name = "lblUsername";
-            this.lblUsername.Size = new System.Drawing.Size(150, 16);
+            this.lblUsername.Padding = new System.Windows.Forms.Padding(0, 8, 10, 0);
+            this.lblUsername.Size = new System.Drawing.Size(150, 31);
             this.lblUsername.TabIndex = 1;
             this.lblUsername.Text = "사용자명";
             this.lblUsername.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -48,7 +50,7 @@ namespace board
             // userMenu
             // 
             this.userMenu.Name = "userMenu";
-            this.userMenu.Size = new System.Drawing.Size(181, 26);
+            this.userMenu.Size = new System.Drawing.Size(61, 4);
             // 
             // HeaderControl
             // 
@@ -57,7 +59,7 @@ namespace board
             this.Controls.Add(this.lblUsername);
             this.ForeColor = System.Drawing.SystemColors.ActiveCaption;
             this.Name = "HeaderControl";
-            this.Size = new System.Drawing.Size(483, 25);
+            this.Size = new System.Drawing.Size(483, 31);
             this.ResumeLayout(false);
 
         }

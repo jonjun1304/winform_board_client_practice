@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using board.mdi;
 
 namespace board
 {
@@ -24,7 +25,7 @@ namespace board
                 if (result == DialogResult.OK)
                 {
                     // 로그인 성공 후 BoardForm을 실행
-                    Application.Run(new BoardForm());
+                    Application.Run(new TabControlForm());
                 }
             }
         }
