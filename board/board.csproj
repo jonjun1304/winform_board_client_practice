@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="common\HttpClientManager.cs" />
     <Compile Include="form\BoardDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -11,12 +11,13 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using board.dto;
 using board.control;
+using board.common;
 
 namespace board
 {
     public partial class BoardDetailForm : Form
     {
-        private static readonly HttpClient client = new HttpClient();
+        
         private long boardSeq;
         private bool isEditMode = false; // 수정 모드 상태 관리 변수
 
@@ -46,7 +47,7 @@ namespace board
         private async void LoadBoardDetails()
         {
 
-            HttpResponseMessage response = await client.GetAsync($"{Config.ServerUrl}/board/{boardSeq}");
+            HttpResponseMessage response = await HttpClientManager.GetClient().GetAsync($"board/{boardSeq}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -130,7 +131,7 @@ namespace board
             {
                 try
                 {
-                    HttpResponseMessage response = await client.DeleteAsync($"{Config.ServerUrl}/board/{boardSeq}");
+                    HttpResponseMessage response = await HttpClientManager.GetClient().DeleteAsync($"board/{boardSeq}");
 
                     if (response.IsSuccessStatusCode)
                     {
@@ -167,7 +168,7 @@ namespace board
                 string json = JsonConvert.SerializeObject(boardDto);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await client.PutAsync($"{Config.ServerUrl}/board/{boardSeq}", content);
+                HttpResponseMessage response = await HttpClientManager.GetClient().PutAsync($"board/{boardSeq}", content);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -218,7 +219,7 @@ namespace board
 
             try
             {
-                HttpResponseMessage response = await client.GetAsync($"{Config.ServerUrl}/comment/{boardSeq}");
+                HttpResponseMessage response = await HttpClientManager.GetClient().GetAsync($"comment/{boardSeq}");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -245,6 +246,19 @@ namespace board
                         commentControl.Location = new Point(0, yOffset);
                         commentPanel.Controls.Add(commentControl);
                         yOffset += commentControl.Height + 5; // 다음 댓글 위치
+
+                        commentControl.CommentDelete += async (s, e) =>
+                        {
+                            // 여기에 댓글 삭제시 로직 작성하면 될 듯?
+                            if(Session.UserId == comment.userId || Session.AuthorityType == "admin")
+                            {
+                                await DeleteComment(comment.commentId);
+                            }
+                            else
+                            {
+                                MessageBox.Show("댓글 작성자만 삭제가 가능합니다.", "경고", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            }
+                        };
                     }
                 }
                 else
@@ -290,7 +304,7 @@ namespace board
                 string json = JsonConvert.SerializeObject(commentDto);
                 StringContent HttpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await client.PostAsync($"{Config.ServerUrl}/comment", HttpContent);
+                HttpResponseMessage response = await HttpClientManager.GetClient().PostAsync("comment", HttpContent);
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -304,6 +318,32 @@ namespace board
             catch (Exception ex)
             {
                 MessageBox.Show($"댓글 저장 중 오류 발생: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task DeleteComment(string commentId)
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClientManager.GetClient().DeleteAsync($"comment/{commentId}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("댓글이 성공적으로 삭제되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadComments(); // 삭제 성공시 댓글 목록 다시 조회
+                }
+                else
+                {
+                    MessageBox.Show("댓글 삭제에 실패했습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (HttpRequestException ex)
+            {
+                MessageBox.Show($"네트워크 오류가 발생했습니다: {ex.Message}", "네트워크 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"예기치 못한 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

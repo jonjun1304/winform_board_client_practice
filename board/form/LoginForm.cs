@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Net.Http;
+using board.common;
 
 namespace board
 {
@@ -50,22 +51,31 @@ namespace board
 
                 try
                 {
-                    String url = $"{Config.ServerUrl}/user/login";
-                    HttpResponseMessage response = await client.PostAsync(url, content);
+                    String url = $"{Config.ServerUrl}user/login";
+                    //HttpResponseMessage response = await client.PostAsync(url, content);
+                    HttpResponseMessage response = await HttpClientManager.GetClient().PostAsync(url, content);
 
-                    string result = await response.Content.ReadAsStringAsync();//여길 바꿀꺼야
-                    // API 응답 구조에 맞게 처리
-                    var responseDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
-                    string resMsg = responseDict["resMsg"]?.ToString();
-                    var resUser = JsonConvert.DeserializeObject<UserDto>(responseDict["resUser"]?.ToString());
 
                     if (response.IsSuccessStatusCode)
                     {
+                        // 헤더에서 JWT 토큰 추출
+                        if (response.Headers.TryGetValues("Authorization", out var headerValues))
+                        {
+                            var token = headerValues.First().Replace("Bearer ", ""); // "Bearer " 제거
+                            common.Session.JwtToken = token; // Session 클래스에 JWT 저장
+                        }
+
+                        // API 응답 구조에 맞게 처리
+                        string result = await response.Content.ReadAsStringAsync();
+                        var responseDict = JsonConvert.DeserializeObject<Dictionary<string, object>>(result);
+                        string resMsg = responseDict["resMsg"]?.ToString();
+                        var resUser = JsonConvert.DeserializeObject<UserDto>(responseDict["resUser"]?.ToString());
+
                         if (resMsg == "SUCCESS")
                         {
                             MessageBox.Show("로그인 성공", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            common.Session.UserId = resUser.userId;
-                            common.Session.AuthorityType = resUser.authorityType;
+                            Session.UserId = resUser.userId;
+                            Session.AuthorityType = resUser.authorityType;
                             // 로그인 성공 시 LoginForm을 닫음
                             //this.Close();
                             this.DialogResult = DialogResult.OK; // 로그인 성공 시 DialogResult 설정
@@ -86,7 +96,7 @@ namespace board
                     }
                     else
                     {
-                        labelLoginMsg.Text = "로그인 실패. 다시 시도해주세요.";
+                        labelLoginMsg.Text = "로그인 실패. 서버 오류 발생.";
                     }
 
                 }

@@ -43,7 +43,7 @@ namespace board.mdi
 
         private void AddNewTab()
         {
-            // ChildForm 인스턴스 생성
+            // BoardForm 인스턴스 생성
             var childForm = new BoardForm
             {
                 TopLevel = false, // 컨트롤처럼 동작하도록 설정

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Net.Http;
 using Newtonsoft.Json;
+using board.common;
 
 namespace board
 {
     public partial class BoardForm : Form
     {
-        private static readonly HttpClient client = new HttpClient();
         public BoardForm()
         {
             InitializeComponent();
@@ -65,7 +65,7 @@ namespace board
                 return;
             }
 
-            string url = $"{Config.ServerUrl}/board";
+            string url = "board";
 
             // 검색 조건 처리
             var queryParams = new List<string>();
@@ -85,7 +85,8 @@ namespace board
                 url += "?" + string.Join("&", queryParams);
             }
 
-            HttpResponseMessage response = await client.GetAsync(url);
+            //HttpResponseMessage response = await client.GetAsync(url);
+            HttpResponseMessage response = await HttpClientManager.GetClient().GetAsync(url);
 
             if (response.IsSuccessStatusCode)
             {

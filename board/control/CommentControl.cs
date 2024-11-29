@@ -15,6 +15,7 @@ namespace board.control
     public partial class CommentControl : UserControl
     {
         private static readonly HttpClient client = new HttpClient();
+        public event EventHandler CommentDelete;
 
         public CommentControl()
         {
@@ -69,27 +70,8 @@ namespace board.control
 
             if(result == DialogResult.Yes)
             {
-                try
-                {
-                    HttpResponseMessage response = await client.DeleteAsync($"{Config.ServerUrl}/comment/{commentId}");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show("댓글이 성공적으로 삭제되었습니다.", "성공", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("댓글 삭제에 실패했습니다.", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                catch (HttpRequestException ex)
-                {
-                    MessageBox.Show($"네트워크 오류가 발생했습니다: {ex.Message}", "네트워크 오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"예기치 못한 오류가 발생했습니다: {ex.Message}", "오류", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                // 이벤트 대리자 호출?
+                CommentDelete?.Invoke(this, EventArgs.Empty);
             }
 
         }

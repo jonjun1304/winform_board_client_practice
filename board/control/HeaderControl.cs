@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using board.common;
 
 namespace board
 {
@@ -78,8 +79,8 @@ namespace board
         private void BtnLogout_Click(object sender, EventArgs e)
         {
             // 로그아웃 로직
-            common.Session.UserId = null;
-            common.Session.AuthorityType = null;
+            Session.Clear();
+
             Form currentForm = this.FindForm();
             if (currentForm != null)
             {
